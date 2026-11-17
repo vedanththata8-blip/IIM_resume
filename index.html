@@ -3,13 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Resume</title>
+  <title>Vedanth Thata | Resume</title>
   <style>
-/* ---------- Colour palette (CSS variables) ---------- */
+/* ==========================================================
+   DESIGN TOKENS
+   Minimal palette: cream background, one bold blue, black text.
+   ========================================================== */
 :root {
-  --cream: #f6efdc;
-  --blue: #13388e;
+  --cream: #faf6ec;
+  --blue: #1f4bff;
   --black: #111111;
+  --line: rgba(17, 17, 17, 0.12);   /* thin border colour */
+
+  --space-s: 0.5rem;
+  --space-m: 1rem;
+  --space-l: 2rem;
+  --space-xl: 4rem;
+
+  --radius: 12px;
 }
 
 /* ---------- Universal selector: reset ---------- */
@@ -19,34 +30,39 @@
   box-sizing: border-box;
 }
 
-/* ---------- Element selector: typography ---------- */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ---------- Element selectors: typography ---------- */
 body {
   background-color: var(--cream);
   color: var(--black);
-  font-family: "Georgia", serif;
-  line-height: 1.6;
-}
-
-h1, h2, h3 {
-  font-family: "Trebuchet MS", sans-serif;
-  color: var(--blue);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.7;
 }
 
 h1 {
   font-size: 3rem;
-  letter-spacing: 2px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  line-height: 1.1;
 }
 
+/* Section titles: small, uppercase, blue */
 h2 {
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
-  border-bottom: 3px solid var(--blue);
-  display: inline-block;
+  color: var(--blue);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: var(--space-m);
 }
 
 h3 {
-  font-size: 1.2rem;
-  margin-bottom: 0.4rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.3;
 }
 
 /* ---------- ID selector: navigation bar ---------- */
@@ -54,142 +70,184 @@ h3 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--black);
-  padding: 1rem 2rem;
+  background-color: var(--cream);
+  border-bottom: 1px solid var(--line);
+  padding: var(--space-m) var(--space-l);
   position: sticky;
   top: 0;
+  z-index: 10;
 }
 
 #navbar ul {
   list-style: none;
   display: flex;
-  gap: 1.5rem;
+  gap: var(--space-l);
 }
 
 #navbar a {
-  color: var(--cream);
+  color: var(--black);
   text-decoration: none;
-  transition: color 0.3s;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
 }
 
 #navbar a:hover {
-  color: #7da2ff;
+  color: var(--blue);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 4px;
 }
 
 /* ---------- Class selector: logo ---------- */
 .logo {
-  color: var(--cream);
-  font-weight: bold;
-  font-size: 1.2rem;
+  color: var(--blue);
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
-/* ---------- ID selector: hero section ---------- */
+/* ---------- ID selector: hero ---------- */
 #hero {
   background-color: var(--blue);
   color: var(--cream);
   text-align: center;
-  padding: 4rem 1rem;
-  animation: fadeIn 1.2s ease;
+  padding: var(--space-xl) var(--space-m);
 }
 
-#hero h1 {
-  color: var(--cream);
-}
-
-/* Profile picture */
 .profile-photo {
-  width: 150px;
-  height: 150px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid var(--cream);
-  margin-bottom: 1rem;
-  transition: transform 0.4s;
-}
-
-.profile-photo:hover {
-  transform: scale(1.05);
+  border: 3px solid var(--cream);
+  margin-bottom: var(--space-m);
 }
 
 .role {
-  font-size: 1.3rem;
-  margin-top: 0.5rem;
+  font-size: 1.1rem;
+  margin-top: var(--space-s);
+  opacity: 0.9;
 }
 
 /* ---------- Layout ---------- */
 main {
-  max-width: 900px;
+  max-width: 820px;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: var(--space-xl) var(--space-m) var(--space-l);
 }
 
 section {
-  margin-bottom: 2.5rem;
+  margin-bottom: var(--space-xl);
+  scroll-margin-top: 5rem;   /* keeps titles clear of the sticky navbar */
 }
 
 /* ---------- Class selector: cards ---------- */
 .card {
-  background-color: white;
-  border-left: 6px solid var(--blue);
-  border-radius: 8px;
-  padding: 1.2rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s, box-shadow 0.3s;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--space-l);
+  transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+  transform: translateY(-4px);
+  border-color: var(--blue);
 }
 
-/* ---------- Feature cards ---------- */
+/* ---------- Feature cards (achievements) ---------- */
 .feature-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.2rem;
+  gap: var(--space-m);
 }
 
-.feature-card {
-  text-align: center;
-  border-left: none;
-  border-top: 6px solid var(--blue);
+.feature-card h3 {
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--black);
+  opacity: 0.6;
 }
 
-.icon {
-  font-size: 2.5rem;
+.stat {
   display: block;
-  margin-bottom: 0.5rem;
+  margin: var(--space-s) 0;
+  color: var(--blue);
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+/* ---------- Education list ---------- */
+.edu-list {
+  list-style: none;
+}
+
+.edu-item {
+  display: grid;
+  grid-template-columns: 175px 1fr;
+  gap: var(--space-m);
+  padding: var(--space-m) 0;
+  border-top: 1px solid var(--line);
+}
+
+/* Pseudo-class: no line above the first item */
+.edu-item:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.edu-item:last-child {
+  padding-bottom: 0;
+}
+
+.edu-period {
+  color: var(--blue);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.edu-item p {
+  font-size: 0.95rem;
+  opacity: 0.7;
 }
 
 /* ---------- Other selectors ---------- */
-/* Descendant selector */
-section p {
-  font-size: 1rem;
-}
-
-/* Attribute selector */
+/* Attribute selector: links that start with # (the navbar links) */
 a[href^="#"] {
-  font-family: "Trebuchet MS", sans-serif;
+  font-weight: 500;
 }
 
-/* Pseudo-class: first card in the grid gets a blue heading underline */
-.feature-card:first-child h3 {
-  text-decoration: underline;
+/* Pseudo-element: small blue dash before each section title */
+h2::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 2px;
+  margin-right: 0.6rem;
+  vertical-align: middle;
+  background-color: var(--blue);
 }
 
 /* ---------- Footer ---------- */
 footer {
-  background-color: var(--black);
-  color: var(--cream);
+  border-top: 1px solid var(--line);
   text-align: center;
-  padding: 1rem;
+  font-size: 0.9rem;
+  padding: var(--space-l) var(--space-m);
+  opacity: 0.7;
 }
 
-/* ---------- Subtle animation ---------- */
-@keyframes fadeIn {
+/* ==========================================================
+   ANIMATION
+   One soft "fade up", reused everywhere. The feature cards
+   appear one after another.
+   ========================================================== */
+@keyframes fadeUp {
   from {
     opacity: 0;
-    transform: translateY(-15px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
@@ -197,18 +255,58 @@ footer {
   }
 }
 
-section {
-  animation: fadeIn 1s ease;
+#hero .profile-photo,
+#hero h1,
+#hero .role,
+.card {
+  animation: fadeUp 0.7s ease both;
+}
+
+#hero h1 {
+  animation-delay: 0.1s;
+}
+
+#hero .role {
+  animation-delay: 0.2s;
+}
+
+/* Pseudo-class nth-child: stagger the feature cards */
+.feature-card:nth-child(2) {
+  animation-delay: 0.12s;
+}
+
+.feature-card:nth-child(3) {
+  animation-delay: 0.24s;
+}
+
+/* Respect people who prefer no motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
 }
 
 /* ---------- Small screens ---------- */
 @media (max-width: 600px) {
   #navbar {
     flex-direction: column;
-    gap: 0.5rem;
+    gap: var(--space-s);
   }
+
+  #navbar ul {
+    gap: var(--space-m);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
   h1 {
-    font-size: 2rem;
+    font-size: 2.2rem;
+  }
+
+  .edu-item {
+    grid-template-columns: 1fr;
+    gap: 0;
   }
 }
 </style>
@@ -217,7 +315,7 @@ section {
 
   <!-- Navigation bar -->
   <nav id="navbar">
-    <span class="logo">My Resume</span>
+    <span class="logo">Vedanth Thata</span>
     <ul>
       <li><a href="#about">About</a></li>
       <li><a href="#experience">Experience</a></li>
@@ -231,9 +329,9 @@ section {
     <!-- To use your own photo: save it as photo.jpg next to this file
          and change src below to src="photo.jpg" -->
     <img class="profile-photo" alt="Profile picture"
-         src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f6efdc'/%3E%3Ccircle cx='50' cy='38' r='18' fill='%2313388e'/%3E%3Cellipse cx='50' cy='90' rx='32' ry='28' fill='%2313388e'/%3E%3C/svg%3E">
-    <h1>Your Name</h1>
-    <p class="role">Developer Intern</p>
+         src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23faf6ec'/%3E%3Ccircle cx='50' cy='38' r='18' fill='%231f4bff'/%3E%3Cellipse cx='50' cy='90' rx='32' ry='28' fill='%231f4bff'/%3E%3C/svg%3E">
+    <h1>Vedanth Thata</h1>
+    <p class="role">Founder and Student</p>
   </header>
 
   <main>
@@ -243,9 +341,8 @@ section {
       <h2>About Me</h2>
       <div class="card">
         <p>
-          I am a motivated developer intern who enjoys learning new things,
-          building small projects, and solving problems. I also take part
-          in music and sports.
+          I am a very curious person who looks at life from a different lens
+          and loves to play outside reality.
         </p>
       </div>
     </section>
@@ -265,21 +362,21 @@ section {
       <div class="feature-grid">
 
         <div class="card feature-card">
-          <span class="icon">🎵</span>
-          <h3>Music</h3>
-          <p>Participated in 1 musical competition.</p>
-        </div>
-
-        <div class="card feature-card">
-          <span class="icon">🏃</span>
-          <h3>Sports</h3>
-          <p>Second rank in the 100 m race.</p>
-        </div>
-
-        <div class="card feature-card">
-          <span class="icon">🏆</span>
           <h3>Academics</h3>
-          <p>Class 10 topper.</p>
+          <span class="stat">87.98%</span>
+          <p>Class 12 board examinations</p>
+        </div>
+
+        <div class="card feature-card">
+          <h3>Extracurriculars</h3>
+          <span class="stat">17+</span>
+          <p>Won competitions in the last 2 years</p>
+        </div>
+
+        <div class="card feature-card">
+          <h3>Sports</h3>
+          <span class="stat">10+</span>
+          <p>Won competitions in the last 4 years</p>
         </div>
 
       </div>
@@ -289,8 +386,41 @@ section {
     <section id="education">
       <h2>Education</h2>
       <div class="card">
-        <h3>Class 10</h3>
-        <p>School topper.</p>
+        <ul class="edu-list">
+
+          <li class="edu-item">
+            <span class="edu-period">LKG – Class 8</span>
+            <div>
+              <h3>Lalaji Memorial Omega International School</h3>
+              <p>Now known as Heartfulness International School, Chennai</p>
+            </div>
+          </li>
+
+          <li class="edu-item">
+            <span class="edu-period">Class 9 – 12</span>
+            <div>
+              <h3>Velammal Bodhi Campus</h3>
+              <p>Kolapakkam, Chennai</p>
+            </div>
+          </li>
+
+          <li class="edu-item">
+            <span class="edu-period">BBA</span>
+            <div>
+              <h3>IIM Bangalore</h3>
+              <p>Bachelor of Business Administration</p>
+            </div>
+          </li>
+
+          <li class="edu-item">
+            <span class="edu-period">Business programme</span>
+            <div>
+              <h3>Massa School of Business</h3>
+              <p>Certification program</p>
+            </div>
+          </li>
+
+        </ul>
       </div>
     </section>
 
